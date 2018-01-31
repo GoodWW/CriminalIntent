@@ -8,7 +8,7 @@ import java.util.UUID;
  * 时间 : 2018/1/31
  * 描述 : 模型层
  */
-public class Crome {
+public class Crime {
     /**
      * 产生唯一的ID值
      */
@@ -20,7 +20,7 @@ public class Crome {
     private String mTitle;
     private boolean mSolved;
 
-    public Crome() {
+    public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();
     }
