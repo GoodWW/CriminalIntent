@@ -1,7 +1,6 @@
 package com.example.zhang.criminalintent;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +27,7 @@ public class CrimeLab {
         return sCrimeLab;
     }
 
-    public CrimeLab(Context context) {
+    private CrimeLab(Context context) {
         mCrimes = new ArrayList<>();
         //先批量存入100个没有个性的Crime对象
         for (int i = 0; i < 100; i++) {
