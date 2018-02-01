@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -42,21 +43,32 @@ public class CrimeListFragment extends Fragment {
     }
 
     /**
-     * 定义内部类实例化 并使用list_item_crime
+     * 定义内部类实例化 并使用list_item_crime  自己处理点击事件
      */
-    private class CrimeHolder extends RecyclerView.ViewHolder {
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitleTextView, mDateTextView;
         private Crime mCrime;
+
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            itemView.setOnClickListener(this);
             mDateTextView = itemView.findViewById(R.id.crime_date);
             mTitleTextView = itemView.findViewById(R.id.crime_title);
         }
 
+        /**
+         * 绑定每条item数据
+         */
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getmTitle());
             mDateTextView.setText(mCrime.getmDate().toString());
+        }
+
+        /**自己实现点击事件的监听*/
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getActivity(), mCrime.getmTitle()+"  clicked!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -70,6 +82,9 @@ public class CrimeListFragment extends Fragment {
             this.mCrimes = crimes;
         }
 
+        /**
+         * 创建ViewHolder
+         */
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
@@ -77,7 +92,7 @@ public class CrimeListFragment extends Fragment {
         }
 
         /**
-         *  绑定数据  调用holder的 bind 方法
+         * 绑定数据  调用holder的 bind 方法
          */
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
