@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  * 作者 : Administrator
  * 时间 : 2018/1/31
- * 描述 : 模型层
+ * 描述 : Crime模型层
  */
 public class Crime {
     /**

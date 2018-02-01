@@ -17,7 +17,7 @@ import android.widget.EditText;
 /**
 *  作者 : Administrator
 *  时间 : 2018/1/31
-*  描述 : 填写类作用
+*  描述 : 显示一个Crime对象的Fragment
 */
 public class CrimeFragment extends Fragment {
 
