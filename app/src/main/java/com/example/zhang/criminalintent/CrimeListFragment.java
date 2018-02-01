@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -44,8 +45,18 @@ public class CrimeListFragment extends Fragment {
      * 定义内部类实例化 并使用list_item_crime
      */
     private class CrimeHolder extends RecyclerView.ViewHolder {
+        private TextView mTitleTextView, mDateTextView;
+        private Crime mCrime;
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            mDateTextView = itemView.findViewById(R.id.crime_date);
+            mTitleTextView = itemView.findViewById(R.id.crime_title);
+        }
+
+        public void bind(Crime crime) {
+            mCrime = crime;
+            mTitleTextView.setText(mCrime.getmTitle());
+            mDateTextView.setText(mCrime.getmDate().toString());
         }
     }
 
@@ -65,9 +76,13 @@ public class CrimeListFragment extends Fragment {
             return new CrimeHolder(layoutInflater, parent);
         }
 
+        /**
+         *  绑定数据  调用holder的 bind 方法
+         */
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
-
+            Crime crime = mCrimes.get(position);
+            holder.bind(crime);
         }
 
         @Override
