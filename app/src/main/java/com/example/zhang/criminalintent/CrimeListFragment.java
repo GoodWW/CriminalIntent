@@ -1,5 +1,6 @@
 package com.example.zhang.criminalintent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,8 +39,12 @@ public class CrimeListFragment extends Fragment {
     private void upDateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
-        mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -72,8 +76,15 @@ public class CrimeListFragment extends Fragment {
         /**自己实现点击事件的监听*/
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mCrime.getmTitle()+"  clicked!", Toast.LENGTH_SHORT).show();
+            Intent intent = CrimeActivity.newIntent(getActivity(),mCrime.getmId());
+            startActivity(intent);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        upDateUI();
     }
 
     /**
